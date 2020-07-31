@@ -20,9 +20,13 @@ router.get('/', async (req, res) => {
 router.get('/:id', async (req, res) => {
   const { id } = req.params;
 
-  const page = await pageService.get(id);
+  try {
+    const page = await pageService.get(id);
 
-  res.json(page);
+    res.json(page);
+  } catch (err) {
+    res.status(404).end();
+  }
 });
 
 router.post('/', validator.body(createPageSchema), async (req, res) => {
