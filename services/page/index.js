@@ -2,6 +2,13 @@ const Page = require('@/models/Page');
 const { PageNotFoundError } = require('./errors');
 
 /**
+ * Get all pages record
+ *
+ * @return {Page[]}
+ */
+exports.all = async () => Page.find({}).select('-elements');
+
+/**
  * Get page record by ID
  *
  * @param  {String} id Page ID
@@ -24,6 +31,23 @@ exports.get = async (id) => {
  * @return {Page}
  */
 exports.create = async (url) => Page.create({ url });
+
+/**
+ * Set page record title
+ *
+ * @param  {String} id     Page ID
+ * @param  {String} title Page title
+ * @return {Page}
+ */
+exports.setTitle = async (id, title) => {
+  const page = await this.get(id);
+
+  page.title = title;
+
+  await page.save();
+
+  return page;
+};
 
 /**
  * Set page record status

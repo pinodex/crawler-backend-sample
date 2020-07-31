@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const {
-  uri,
+  url,
   host,
   port,
   username,
@@ -9,10 +9,10 @@ const {
   db,
 } = require('@/config/mongodb');
 
-let connectionUri = uri;
+let connectionUrl = url;
 
-if (!connectionUri) {
-  connectionUri = username && password
+if (!connectionUrl) {
+  connectionUrl = username && password
     ? `mongodb://${username}:${password}@${host}:${port}/${db}`
     : `mongodb://${host}:${port}/${db}`;
 }
@@ -20,11 +20,11 @@ if (!connectionUri) {
 /**
  * Connect to MongoDB server
  *
- * @param  {String} connectionUriOverride Override connection URI. (Defaults to env)
+ * @param  {String} connectionUrlOverride Override connection URI. (Defaults to env)
  * @param  {Object} optionsOverride       Override options
  */
-exports.connect = (connectionUriOverride = null, optionsOverride = {}) => {
-  const uriToUse = connectionUriOverride || connectionUri;
+exports.connect = (connectionUrlOverride = null, optionsOverride = {}) => {
+  const urlToUse = connectionUrlOverride || connectionUrl;
 
   const options = {
     useNewUrlParser: true,
@@ -33,7 +33,7 @@ exports.connect = (connectionUriOverride = null, optionsOverride = {}) => {
     ...optionsOverride,
   };
 
-  return mongoose.connect(uriToUse, options);
+  return mongoose.connect(urlToUse, options);
 };
 
 exports.mongoose = mongoose;

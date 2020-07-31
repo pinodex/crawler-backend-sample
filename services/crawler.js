@@ -5,35 +5,37 @@ const puppeteer = require('puppeteer');
  *
  * @param  {String}   url       Page URL to evaluate
  * @param  {String[]} selectors List of selectors to include
- * @return {Object[]}
+ * @return {Object}
  */
-exports.evaluateElements = async (url, selectors = []) => {
+exports.evaluateElements = async (url, selectors = ['h1', 'h2', 'h3', 'a']) => {
   const browser = await puppeteer.launch();
   const page = await browser.newPage();
 
   await page.goto(url);
 
   const evalFunction = (selectorString) => {
-    const elements = document.querySelectorAll(selectorString);
-    const output = [];
+    const results = document.querySelectorAll(selectorString);
 
-    elements.forEach((element) => {
-      output.push({
+    const { title } = document;
+    const elements = [];
+
+    results.forEach((element) => {
+      elements.push({
         innerText: element.innerText,
         tagName: element.tagName,
         href: element.getAttribute('href'),
       });
     });
 
-    return output;
+    return { title, elements };
   };
 
-  const crawledElements = await page.evaluate(
+  const output = await page.evaluate(
     evalFunction,
     selectors.join(','),
   );
 
   await browser.close();
 
-  return crawledElements;
+  return output;
 };

@@ -1,5 +1,5 @@
 module.exports = {
-  uri: process.env.MONGODB_URI,
+  url: process.env.MONGODB_URL,
   host: process.env.MONGODB_HOST,
   port: process.env.MONGODB_PORT,
   username: process.env.MONGODB_USER || null,
