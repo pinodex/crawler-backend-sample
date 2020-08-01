@@ -9,8 +9,6 @@ services:
     depends_on:
       - mongodb
       - redis
-    ports:
-      - '3000:3000'
 
   mongodb:
     image: mongo:4.2-bionic
