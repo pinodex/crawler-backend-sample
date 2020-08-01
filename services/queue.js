@@ -7,6 +7,6 @@ const { getInstance } = require('@/services/ioredis');
  * @param  {String} name Queue name
  * @return {Bull}
  */
-exports.create = (name) => new Bull(name, null, {
-  createClient: () => getInstance(),
+exports.create = (name) => new Bull(name, {
+  createClient: (type) => getInstance(type),
 });

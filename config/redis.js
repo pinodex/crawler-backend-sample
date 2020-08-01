@@ -1,3 +1,3 @@
 module.exports = {
-  uri: process.env.REDIS_URL,
+  url: process.env.REDIS_URL,
 };
