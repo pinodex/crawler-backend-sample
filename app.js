@@ -3,9 +3,14 @@ const path = require('path');
 const cors = require('cors');
 const logger = require('morgan');
 
+const { env } = require('@/config/app');
+
 const app = express();
 
-app.use(logger('dev'));
+if (env !== 'test') {
+  app.use(logger('dev'));
+}
+
 app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));

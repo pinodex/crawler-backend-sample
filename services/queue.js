@@ -1,5 +1,5 @@
 const Bull = require('bull');
-const { getRedisInstance } = require('@/services/ioredis');
+const { getInstance } = require('@/services/ioredis');
 
 /**
  * Create Bull instance
@@ -8,5 +8,5 @@ const { getRedisInstance } = require('@/services/ioredis');
  * @return {Bull}
  */
 exports.create = (name) => new Bull(name, null, {
-  createClient: () => getRedisInstance(),
+  createClient: () => getInstance(),
 });

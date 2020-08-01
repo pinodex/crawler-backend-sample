@@ -9,10 +9,19 @@ let instance = null;
  *
  * @return {Redis}
  */
-exports.getRedisInstance = () => {
+exports.getInstance = () => {
   if (instance === null) {
     instance = new Redis(url);
   }
 
   return instance;
+};
+
+/**
+ * Set ioredis instance
+ *
+ * @param  {Redis} newInstance ioredis instance
+ */
+exports.setInstance = (newInstance) => {
+  instance = newInstance;
 };

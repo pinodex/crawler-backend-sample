@@ -36,7 +36,7 @@ router.post('/', validator.body(createPageSchema), async (req, res) => {
 
   crawlPageQueue.add({ page });
 
-  res.json(page);
+  res.status(201).json(page);
 });
 
 module.exports = router;
