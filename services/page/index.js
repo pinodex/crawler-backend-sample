@@ -6,7 +6,7 @@ const { PageNotFoundError } = require('./errors');
  *
  * @return {Page[]}
  */
-exports.all = async () => Page.find({}).select('-elements');
+exports.all = async () => Page.find({}).sort({ createdAt: 'desc' }).select('-elements');
 
 /**
  * Get page record by ID
