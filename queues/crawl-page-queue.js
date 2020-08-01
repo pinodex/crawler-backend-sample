@@ -23,7 +23,7 @@ crawlPageQueue.process(async (job) => {
   } catch (err) {
     pageService.setStatus(page.id, 'failed');
 
-    logger.info(`Failed crawl page queue: ${page.id}`);
+    logger.info(`Failed crawl page queue: ${page.id}: ${err}`);
 
     throw err;
   }

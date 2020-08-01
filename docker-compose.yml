@@ -1,0 +1,19 @@
+version: '3'
+
+services:
+  crawler:
+    build: ./
+    environment:
+      MONGODB_URL: 'mongodb://mongodb:27017/crawler?readPreference=primary&ssl=false'
+      REDIS_URL: 'redis://redis:6379/0'
+    depends_on:
+      - mongodb
+      - redis
+    ports:
+      - '3000:3000'
+
+  mongodb:
+    image: mongo:4.2-bionic
+
+  redis:
+    image: redis:6.0-alpine

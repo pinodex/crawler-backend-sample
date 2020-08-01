@@ -8,7 +8,13 @@ const puppeteer = require('puppeteer');
  * @return {Object}
  */
 exports.evaluateElements = async (url, selectors = ['h1', 'h2', 'h3', 'a']) => {
-  const browser = await puppeteer.launch();
+  const browser = await puppeteer.launch({
+    args: [
+      '--disable-dev-shm-usage',
+      '--no-sandbox',
+    ],
+  });
+
   const page = await browser.newPage();
 
   await page.goto(url);
